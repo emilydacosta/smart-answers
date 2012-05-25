@@ -5,9 +5,16 @@ en-GB:
       body: |
         Use this calculator to work out how much statutory holiday leave you're entitled to.
       options:
-        full_time: "Full-time"
-        part_time: "Part-time"
-        casual_or_irregular: "Casual or irregular hours"
-        annualised_hours: "Annualised hours"
-        compressed_hours: "Compressed hours"
-        shift_worker: "Shift worker"
+        "full-time": "Full-time"
+        "part-time": "Part-time"
+        "casual-or-irregular-hours": "Casual or irregular hours"
+        "annualised-hours": "Annualised hours"
+        "compressed-hours": "Compressed hours"
+        "shift-worker": "Shift worker"
+
+      full_time_worked?:
+        title: Full time status
+        hint: How long will you be employed full-time?
+        options:
+          full_time_year: "A full year"
+          full_time_part: "Part of a year - I am leaving TBD"

@@ -10,6 +10,14 @@ multiple_choice :employment_status? do
 end
 
 multiple_choice :full_time_worked? do
-  option :full_time_year => :full_time_year
-  option :full_time_part => :full_time_part
+  option "year" => :full_time_year
+  option "part-year" => :full_time_part
 end
+
+multiple_choice :full_time_year do
+  option "5-days" => :done_full_time_5_days
+  option "more-than-5" => :done_full_time_more_than_5
+end
+
+outcome :done_full_time_5_days
+outcome :done_full_time_more_than_5

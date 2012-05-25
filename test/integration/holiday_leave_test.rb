@@ -11,7 +11,7 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
   end
 
   test "Has correct options" do
-    assert has_question? "Are you:"
+    assert has_question? "Employment status?"
     assert has_content? "Full-time"
     assert has_content? "Part-time"
     assert has_content? "Casual or irregular hours"

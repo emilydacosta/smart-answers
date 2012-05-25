@@ -1,0 +1,13 @@
+en-GB:
+  flow:
+    calculate-your-holiday-entitlement:
+      title: Calculate your holiday entitlement
+      body: |
+        Use this calculator to work out how much statutory holiday leave you're entitled to.
+      options:
+        full_time: "Full-time"
+        part_time: "Part-time"
+        casual_or_irregular: "Casual or irregular hours"
+        annualised_hours: "Annualised hours"
+        compressed_hours: "Compressed hours"
+        shift_worker: "Shift worker"

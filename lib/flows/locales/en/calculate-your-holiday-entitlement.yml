@@ -37,14 +37,31 @@ en-GB:
           - Give you more paid holiday - this will be in your employment contract and is called 'contractual leave entitlement'
 
       part_time_worked?:
-        title: Part time worked
-        hint: How long will you be employed part-time?
+        title: How long will you be employed?
         options:
           "year": "A full year"
-          "part-year": "Part of the year"
+          "starting": "Starting this year"
+          "leaving": "Leaving this year"
+
+      part_time_leaving_date?:
+        title: When are you leaving?
+
+      part_time_starting_date?:
+        title: When are you starting?
 
       part_time_year_days_worked?:
-        title: Days worked per week
+        title: How many days per week?
+
+      part_time_part_year_days_worked?:
+        title: How many days per week?
+
+      compressed_hours?:
+        title: How many hours per week do you work?
+        label: Hours per week
+
+      compressed_hours_days?:
+        title: How many days per week do you work?
+        label: Days per week
 
       done_part_time_year:
         title: Statutory holiday entitlement is %{part_time_holiday_entitlement} of your working days
@@ -55,3 +72,46 @@ en-GB:
 
           - Include public and bank holidays as part of your statutory entitlement
           - Give you more paid holiday - this will be in your employment contract and is called 'contractual leave eneitlement'
+
+      done_part_time_part_year:
+        title: Statutory holiday entitlement is %{part_time_holiday_entitlement} of your working days
+        body: |
+          Your paid statutory holiday entitlement is %{part_time_holiday_entitlement} of your working days.
+
+          Your employer:
+
+          - Can include public and bank holidays as part of your statutory entitlement
+          - Must not round down your holiday entitlement, but may round it up
+          - Can give you more paid holiday - this will be in your employment contract and is called 'contractual leave entitlement'
+
+      done_casual_hours:
+        title: Statutory holiday entitlement is %{casual_holiday_entitlement} hours
+        body: |
+          Your paid statutory holiday entitlement is %{casual_holiday_entitlement} hours.
+
+          Your employer can:
+
+          - Include public and bank holidays as part of your statutory entitlement
+          - Give you more paid holiday - this will be in your employment contract and is called 'contractual leave entitlement'
+
+      done_annualised_hours:
+        title: Statutory holiday entitlement is %{annualised_holiday_entitlement} hours
+        body: |
+          Your paid statutory holiday entitelement is %{annualised_holiday_entitlement} hours for the year.
+
+          Your employer can:
+
+          - Include public and bank holidays as part of your statutory entitlement
+          - Give you more paid holiday - this will be in your employment contract and is called 'contractual leave entitlement'
+
+      done_compressed_hours:
+        title: Statutory holiday entitlement is %{hours} hours
+
+        body: |
+          Your paid statutory holiday entitlement is %{hours} hours. You should take %{hours_daily} hours for each day of holiday.
+
+          Your employer:
+
+          - Can include public and bank holidays as part of your statutory entitlement
+          - Must not round down your holiday entitlement, but may round it up
+          - Can give you more paid holiday - this will be in your employment contract and is called 'contractual leave entitlement'

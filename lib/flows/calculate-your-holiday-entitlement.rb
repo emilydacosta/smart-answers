@@ -1,4 +1,5 @@
 status :draft
+section_slug "work"
 
 multiple_choice :employment_status? do
   option "full-time" => :full_time_worked?

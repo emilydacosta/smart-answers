@@ -11,7 +11,7 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
   end
 
   test "Has correct options" do
-    assert has_question? "Employment status?"
+    assert has_question? "What is your employment status?"
     assert has_content? "Full-time"
     assert has_content? "Part-time"
     assert has_content? "Casual or irregular hours"
@@ -23,17 +23,38 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
   test "Full-time" do
     choose "Full-time"
     click_next_step
-    assert has_question? "Calculate your holiday entitlement based on"
+    assert has_question? "How long will you be employed full-time?"
     assert has_content? "A full year"
     assert has_content? "Part of a year"
+  end
+
+  test "Full-time all year flow" do
+    choose "Full-time"
+    click_next_step
+    choose "A full year"
+    click_next_step
+    choose "5 days per week"
+    click_next_step
+    assert has_content? "Your paid statutory holiday entitlement is 28 of your working days."
+  end
+
+  test "Full-time all year more than 5 days flow" do
+    choose "Full-time"
+    click_next_step
+    choose "A full year"
+    click_next_step
+    choose "6 or 7 days per week"
+    click_next_step
+    assert has_content? "get more statutory leave than this even if you work over 5 days a week"
   end
 
   test "Part-time" do
     choose "Part-time"
     click_next_step
-    assert has_question? "Calculate your holiday entitlement based on"
+    assert has_question? "How long will you be employed part-time?"
     assert has_content? "A full year"
-    assert has_content? "Part of a year"
+    assert has_content? "Starting this year"
+    assert has_content? "Leaving this year"
   end
 
   test "Casual or irregular hours" do
@@ -51,13 +72,13 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
   test "Compressed hours" do
     choose "Compressed hours"
     click_next_step
-    assert has_question? "How many hours a week do you work?"
+    assert has_question? "How many hours per week do you work?"
   end
 
   test "Shift worker" do
     choose "Shift worker"
     click_next_step
-    assert has_question? "Calculate holiday allowance on the basis of"
+    assert has_question? "How long are you working in shifts?"
   end
 
 end

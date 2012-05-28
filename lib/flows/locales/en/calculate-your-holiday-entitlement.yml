@@ -16,15 +16,15 @@ en-GB:
         title: Full time status
         hint: How long will you be employed full-time?
         options:
-          "year": "A full year"
+          "full-year": "A full year"
           "part-year": "Part of a year - I am leaving/starting this year"
 
       full_time_year:
         title: Full year worked
         hint: How many days per week are you working?
         options:
-          "5-days": "5 days per week"
-          "more-than-5": "6 or 7 days per week"
+          "5-days-a-week": "5 days per week"
+          "more-than-5-days-a-week": "6 or 7 days per week"
 
       done_full_time_5_days:
         title: Statutory entitlement of 28 days per year
@@ -39,7 +39,7 @@ en-GB:
       part_time_worked?:
         title: How long will you be employed?
         options:
-          "year": "A full year"
+          "full-year": "A full year"
           "starting": "Starting this year"
           "leaving": "Leaving this year"
 

@@ -11,13 +11,13 @@ multiple_choice :what_is_your_employment_status? do
 end
 
 multiple_choice :full_time_worked? do
-  option "year" => :full_time_year
+  option "full-year" => :full_time_year
   option "part-year" => :full_time_part_leaving
 end
 
 multiple_choice :full_time_year do
-  option "5-days" => :done_full_time_5_days
-  option "more-than-5" => :done_full_time_more_than_5
+  option "5-days-a-week" => :done_full_time_5_days
+  option "more-than-5-days-a-week" => :done_full_time_more_than_5
 end
 
 # TODO: can we factor this date range stuff out? It's all the same
@@ -30,7 +30,7 @@ date_question :full_time_part_leaving do
 end
 
 multiple_choice :part_time_worked? do
-  option "year" => :part_time_year_days_worked?
+  option "full-year" => :part_time_year_days_worked?
   option "starting" => :part_time_starting_date?
   option "leaving" => :part_time_leaving_date?
 end

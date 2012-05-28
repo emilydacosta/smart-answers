@@ -1,6 +1,8 @@
 status :draft
 section_slug "work"
 
+calculator = HolidayEntitlementCalculator.new()
+
 multiple_choice :what_is_your_employment_status? do
   option "full-time" => :full_time_worked?
   option "part-time" => :part_time_worked?
@@ -51,7 +53,8 @@ date_question :part_time_leaving_date? do
   to { Date.civil(Date.today.year, 12, 31) }
   save_input_as :leaving_date
   next_node :part_time_part_year_days_worked?
-  calculate :days_employed do
+  calculate :fraction_of_year do
+    calculator.fraction_of_year leaving_date, Date.civil(Date.today.year, 1, 1)
   end
 end
 
@@ -67,7 +70,7 @@ value_question :part_time_part_year_days_worked? do
   next_node :done_part_time_part_year
   calculate :part_time_holiday_entitlement do
     # TODO: clarify exact rounding with Simon Kaplan
-    responses.last.to_f * 5.6
+    responses.last.to_f * 5.6 * fraction_of_year
   end
 end
 

@@ -17,7 +17,7 @@ en-GB:
         hint: How long will you be employed full-time?
         options:
           "year": "A full year"
-          "part-year": "Part of a year - I am leaving TBD"
+          "part-year": "Part of a year - I am leaving/starting this year"
 
       full_time_year:
         title: Full year worked
@@ -27,7 +27,7 @@ en-GB:
           "more-than-5": "6 or 7 days per week"
 
       done_full_time_5_days:
-        title: Statutory leave for full-time work of 5 days per week
+        title: Statutory entitlement of 28 days per year
         body: |
           Your paid statutory holiday entitlement is 28 of your working days.
 
@@ -35,3 +35,23 @@ en-GB:
 
           - Include public and bank holidays as part of your statutory entitlement
           - Give you more paid holiday - this will be in your employment contract and is called 'contractual leave entitlement'
+
+      part_time_worked?:
+        title: Part time worked
+        hint: How long will you be employed part-time?
+        options:
+          "year": "A full year"
+          "part-year": "Part of the year"
+
+      part_time_year_days_worked?:
+        title: Days worked per week
+
+      done_part_time_year:
+        title: Statutory holiday entitlement is %{part_time_holiday_entitlement} of your working days
+        body: |
+          Your paid statutory holiday entitlement is %{part_time_holiday_entitlement} of your working days.
+
+          Your employer can:
+
+          - Include public and bank holidays as part of your statutory entitlement
+          - Give you more paid holiday - this will be in your employment contract and is called 'contractual leave eneitlement'

@@ -22,7 +22,7 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
 
   test "Full-time" do
     choose "Full-time"
-    click_on_next_step
+    click_next_step
     assert has_question? "Calculate your holiday entitlement based on"
     assert has_content? "A full year"
     assert has_content? "Part of a year"
@@ -30,7 +30,7 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
 
   test "Part-time" do
     choose "Part-time"
-    click_on_next_step
+    click_next_step
     assert has_question? "Calculate your holiday entitlement based on"
     assert has_content? "A full year"
     assert has_content? "Part of a year"

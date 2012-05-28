@@ -106,6 +106,31 @@ value_question :compressed_hours_days? do
   end
 end
 
+multiple_choice :shift_worker_basis? do
+  option "full-year" => :shift_worker_year_shift_length?
+  option "part-year" => :shift_worker_part_year
+end
+
+value_question :shift_worker_year_shift_length? do
+  next_node :shift_worker_year_shift_count?
+  save_input_as :shift_length
+end
+
+value_question :shift_worker_year_shift_count? do
+  next_node :shift_worker_days_pattern?
+  save_input_as :shift_count
+end
+
+value_question :shift_worker_days_pattern? do
+  next_node :done_shift_worker_year
+  calculate :shifts_per_week do
+    (shift_count.to_f / responses.last.to_f) * 7
+  end
+  calculate :holiday_entitlement do
+    shifts_per_week * 5.6
+  end
+end
+
 outcome :done_full_time_5_days
 outcome :done_full_time_more_than_5
 outcome :done_part_time_year
@@ -113,3 +138,4 @@ outcome :done_part_time_part_year
 outcome :done_casual_hours
 outcome :done_annualised_hours
 outcome :done_compressed_hours
+outcome :done_shift_worker_year

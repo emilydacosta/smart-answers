@@ -41,6 +41,22 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
     assert_results_contain "get more statutory leave than this even if you work over 5 days a week"
   end
 
+  test "Full time starting this year flow" do
+    respond_with "Full-time"
+    respond_with "Part of a year - I am starting this year"
+    respond_with "2012-08-01"
+    respond_with "5 days per week"
+    assert_results_contain "11.7 days"
+  end
+
+  test "Full time leaving this year flow" do
+    respond_with "Full-time"
+    respond_with "Part of a year - I am leaving this year"
+    respond_with "2012-08-01"
+    respond_with "5 days per week"
+    assert_results_contain "16.3 days"
+  end
+
   test "Part-time" do
     respond_with "Part-time"
     assert has_question? "How long will you be employed part-time?"
@@ -108,6 +124,35 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
   test "Shift worker" do
     respond_with "Shift worker"
     assert has_question? "How long are you working in shifts?"
+  end
+
+  test "Shift worker full year flow" do
+    respond_with "Shift worker"
+    respond_with "A full year"
+    respond_with "8"
+    respond_with "3"
+    respond_with "10"
+    assert_results_contain "11.8 8 hour shifts"
+  end
+
+  test "Shift worker starting this year flow" do
+    respond_with "Shift worker"
+    respond_with "Part of a year - I am starting this year"
+    respond_with "2012-04-01"
+    respond_with "8"
+    respond_with "3"
+    respond_with "10"
+    assert_results_contain "7.9 8 hour shifts"
+  end
+
+  test "Shift worker leaving this year flow" do
+    respond_with "Shift worker"
+    respond_with "Part of a year - I am leaving this year"
+    respond_with "2012-06-01"
+    respond_with "8"
+    respond_with "3"
+    respond_with "10"
+    assert_results_contain "6 8 hour shifts"
   end
 
 end

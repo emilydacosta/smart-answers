@@ -93,7 +93,8 @@ en-GB:
         title: How long are you working in shifts?
         options:
           "full-year": "A full year"
-          "part-year": "Part of a year - I am leaving/starting this year"
+          "starting": "Part of a year - I am starting this year"
+          "leaving": "Part of a year - I am leaving this year"
 
       shift_worker_year_shift_length?:
         title: How many hours in each shift?

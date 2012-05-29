@@ -62,16 +62,14 @@ end
 value_question :part_time_year_days_worked? do
   next_node :done_part_time_year
   calculate :part_time_holiday_entitlement do
-    # TODO: clarify exact rounding with Simon Kaplan
-    responses.last.to_f * 5.6
+    calculator.format_number responses.last.to_f * 5.6
   end
 end
 
 value_question :part_time_part_year_days_worked? do
   next_node :done_part_time_part_year
   calculate :part_time_holiday_entitlement do
-    # TODO: clarify exact rounding with Simon Kaplan
-    responses.last.to_f * 5.6 * fraction_of_year
+    calculator.format_number responses.last.to_f * 5.6 * fraction_of_year
   end
 end
 

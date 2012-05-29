@@ -23,5 +23,11 @@ module SmartAnswer
       days = (seconds_to_hash date1.to_time - date2.to_time)[:dd]
       days.to_f / (Date.today.leap? ? 366 : 365)
     end
+
+    def format_number(number)
+      # TODO: round decimal places?
+      # TODO: clarify exact rounding with Simon Kaplan
+      sprintf("%.1f", number)
+    end
   end
 end

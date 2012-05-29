@@ -31,6 +31,13 @@ en-GB:
       full_time_starting_date?:
         title: When are you starting?
 
+      full_time_part_year_days?:
+        title: How many days per week are you working?
+        options:
+          "5-days": "5 days per week"
+          "6-days": "6 days per week"
+          "7-days": "7 days per week"
+
       done_full_time_5_days:
         title: Statutory entitlement of 28 days per year
         body: |
@@ -42,7 +49,7 @@ en-GB:
           - Give you more paid holiday - this will be in your employment contract and is called 'contractual leave entitlement'
 
       done_full_time_more_than_5:
-        title: Maxiumum entitlement of 28 days per year
+        title: Maximum entitlement of 28 days per year
         body: |
           Your paid statutory holiday entitlement is 28 of your working days - you can't get more statutory leave than this even if you work over 5 days a week.
 
@@ -50,6 +57,17 @@ en-GB:
 
           - Include public and bank holidays as part of your statutory entitlement
           - Give you more paid holiday - this will be in your employment contract and is called 'contractual leave entitlement'
+
+      done_full_time_part_year:
+        title: Statutory entitlement is %{holiday_entitlement_days} days
+        body: |
+          Your paid statutory holiday entitlement is %{holiday_entitlement_days} of your working days.
+
+          Your employer:
+
+          - Can include bank and public holidays as part of your statutory entitlement
+          - Must not round down your holiday entitlement, but may round it up
+          - Can give you more paid holiday - this will be in your employment contract and is called 'contractual leave entitlement'
 
       part_time_worked?:
         title: How long will you be employed part-time?

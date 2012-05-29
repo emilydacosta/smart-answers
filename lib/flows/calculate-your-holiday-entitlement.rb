@@ -49,7 +49,7 @@ multiple_choice :full_time_part_year_days? do
   option "6-days" => :done_full_time_part_year
   option "7-days" => :done_full_time_part_year
   calculate :holiday_entitlement_days do
-    5.6 * fraction_of_year * responses.last.sub('-days', '').to_f
+    calculator.format_number 5.6 * fraction_of_year * responses.last.sub('-days', '').to_f
   end
 end
 

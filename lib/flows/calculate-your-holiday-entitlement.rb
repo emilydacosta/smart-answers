@@ -43,7 +43,8 @@ date_question :part_time_starting_date? do
   to { Date.civil(Date.today.year, 12, 31) }
   save_input_as :start_date
   next_node :part_time_part_year_days_worked?
-  calculate :days_employed do
+  calculate :fraction_of_year do
+    calculator.fraction_of_year Date.civil(Date.today.year, 12, 31), start_date
   end
 end
 

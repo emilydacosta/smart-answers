@@ -132,11 +132,23 @@ end
 value_question :compressed_hours_days? do
   next_node :done_compressed_hours
   save_input_as :days_per_week
+  calculate :seconds_allowance do
+    calculator.hours_as_seconds hours_per_week.to_f * 5.6
+  end
   calculate :hours do
-    hours_per_week.to_f * 5.6
+    (calculator.seconds_to_hash(seconds_allowance)[:dd] * 24) + calculator.seconds_to_hash(seconds_allowance)[:hh]
+  end
+  calculate :minutes do
+    calculator.seconds_to_hash(seconds_allowance)[:mm]
+  end
+  calculate :seconds_daily do
+    calculator.hours_as_seconds hours_per_week.to_f / days_per_week.to_f
   end
   calculate :hours_daily do
-    hours_per_week.to_f / days_per_week.to_f
+    calculator.seconds_to_hash(seconds_daily)[:hh]
+  end
+  calculate :minutes_daily do
+    calculator.seconds_to_hash(seconds_daily)[:mm]
   end
 end
 

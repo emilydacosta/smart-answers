@@ -152,7 +152,7 @@ en-GB:
         title: Statutory holiday entitlement is %{hours} hours
 
         body: |
-          Your paid statutory holiday entitlement is %{hours} hours. You should take %{hours_daily} hours for each day of holiday.
+          Your paid statutory holiday entitlement is %{hours} hours and %{minutes} minutes. You should take %{hours_daily} hours and %{minutes_daily} minutes for each day of holiday.
 
           Your employer:
 

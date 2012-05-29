@@ -46,7 +46,7 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
     respond_with "Part of a year - I am starting this year"
     respond_with "2012-08-01"
     respond_with "5 days per week"
-    assert_results_contain "11.7 days"
+    assert_results_contain "11.6 days"
   end
 
   test "Full time leaving this year flow" do
@@ -54,7 +54,7 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
     respond_with "Part of a year - I am leaving this year"
     respond_with "2012-08-01"
     respond_with "5 days per week"
-    assert_results_contain "16.3 days"
+    assert_results_contain "16.2 days"
   end
 
   test "Part-time" do

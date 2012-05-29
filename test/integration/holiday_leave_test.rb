@@ -61,7 +61,7 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
     respond_with "Part of a year - I am leaving this year"
     respond_with '2012-05-01'
     respond_with 3
-    assert_results_contain "5.5"
+    assert_results_contain "5.5 of your working days"
   end
 
   test "Casual or irregular hours" do
@@ -69,14 +69,40 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
     assert has_question? "How many hours have you worked?"
   end
 
+  test "Casual or irregular hours flow" do
+    respond_with "Casual or irregular hours"
+    respond_with 200
+    assert_results_contain "24 hours"
+    assert_results_contain "8 minutes"
+  end
+
   test "Annualised hours" do
     respond_with "Annualised hours"
     assert has_question? "How many hours do you work a year?"
   end
 
+  test "Annualised hours flow" do
+    respond_with "Annualised hours"
+    respond_with 220
+    assert_results_contain "26 hours"
+    assert_results_contain "33 minutes"
+  end
+
   test "Compressed hours" do
     respond_with "Compressed hours"
     assert has_question? "How many hours per week do you work?"
+  end
+
+  test "Compressed hours flow" do
+    respond_with "Compressed hours"
+    respond_with 32
+    respond_with 3
+    # This is total
+    assert_results_contain "179 hours"
+    assert_results_contain "12 minutes"
+    # This is per holiday day
+    assert_results_contain "10 hours"
+    assert_results_contain "40 minutes"
   end
 
   test "Shift worker" do

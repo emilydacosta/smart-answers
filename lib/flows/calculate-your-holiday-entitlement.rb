@@ -95,11 +95,12 @@ end
 
 value_question :casual_or_irregular_hours? do
   next_node :done_casual_hours
+  save_input_as :total_hours
   calculate :casual_holiday_entitlement do
-    calculator.hours_as_seconds responses.last.to_f * (5.6 / (52.0 - 5.6))
+    calculator.hours_as_seconds total_hours.to_f * (5.6 / (52.0 - 5.6))
   end
   calculate :entitlement_hours do
-    (calculator.seconds_to_hash(holiday_entitlement)[:dd] * 24) + calculator.seconds_to_hash(casual_holiday_entitlement)[:hh]
+    (calculator.seconds_to_hash(casual_holiday_entitlement)[:dd] * 24) + calculator.seconds_to_hash(casual_holiday_entitlement)[:hh]
   end
   calculate :entitlement_minutes do
     calculator.seconds_to_hash(casual_holiday_entitlement)[:mm]
@@ -108,8 +109,9 @@ end
 
 value_question :annualised_hours? do
   next_node :done_annualised_hours
+  save_input_as :total_hours
   calculate :annualised_weekly_average do
-    responses.last.to_f / 46.4
+    total_hours.to_f / 46.4
   end
   calculate :holiday_entitlement do
     calculator.hours_as_seconds 5.6 * annualised_weekly_average.to_f

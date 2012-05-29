@@ -21,63 +21,66 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
   end
 
   test "Full-time" do
-    choose "Full-time"
-    click_next_step
+    respond_with "Full-time"
     assert has_question? "How long will you be employed full-time?"
     assert has_content? "A full year"
     assert has_content? "Part of a year"
   end
 
   test "Full-time all year flow" do
-    choose "Full-time"
-    click_next_step
-    choose "A full year"
-    click_next_step
-    choose "5 days per week"
-    click_next_step
-    assert has_content? "Your paid statutory holiday entitlement is 28 of your working days."
+    respond_with "Full-time"
+    respond_with "A full year"
+    respond_with "5 days per week"
+    assert_results_contain "Your paid statutory holiday entitlement is 28 of your working days."
   end
 
   test "Full-time all year more than 5 days flow" do
-    choose "Full-time"
-    click_next_step
-    choose "A full year"
-    click_next_step
-    choose "6 or 7 days per week"
-    click_next_step
-    assert has_content? "get more statutory leave than this even if you work over 5 days a week"
+    respond_with "Full-time"
+    respond_with "A full year"
+    respond_with "6 or 7 days per week"
+    assert_results_contain "get more statutory leave than this even if you work over 5 days a week"
   end
 
   test "Part-time" do
-    choose "Part-time"
-    click_next_step
+    respond_with "Part-time"
     assert has_question? "How long will you be employed part-time?"
     assert has_content? "A full year"
-    assert has_content? "Starting this year"
-    assert has_content? "Leaving this year"
+    assert has_content? "Part of a year - I am starting this year"
+    assert has_content? "Part of a year - I am leaving this year"
+  end
+
+  test "Part-time all year flow" do
+    respond_with "Part-time"
+    respond_with "A full year"
+    respond_with 3
+    assert_results_contain "16.8 of your working days"
+  end
+
+  test "Part-time part of the year flow" do
+    respond_with "Part-time"
+    respond_with "Part of a year - I am leaving this year"
+    respond_with '2012-05-01'
+    respond_with 3
+    assert_results_contain "5.5"
   end
 
   test "Casual or irregular hours" do
-    choose "Casual or irregular hours"
-    click_next_step
-    assert has_question? "Calculate your holiday entitlement based on"
+    respond_with "Casual or irregular hours"
+    assert has_question? "How many hours have you worked?"
   end
 
   test "Annualised hours" do
-    choose "Annualised hours"
-    click_next_step
-    assert has_question? "How many hours do you work per year?"
+    respond_with "Annualised hours"
+    assert has_question? "How many hours do you work a year?"
   end
 
   test "Compressed hours" do
-    choose "Compressed hours"
-    click_next_step
+    respond_with "Compressed hours"
     assert has_question? "How many hours per week do you work?"
   end
 
   test "Shift worker" do
-    choose "Shift worker"
-    click_next_step
+    respond_with "Shift worker"
     assert has_question? "How long are you working in shifts?"
   end
 

@@ -97,7 +97,7 @@ en-GB:
           Your employer can:
 
           - Include public and bank holidays as part of your statutory entitlement
-          - Give you more paid holiday - this will be in your employment contract and is called 'contractual leave eneitlement'
+          - Give you more paid holiday - this will be in your employment contract and is called 'contractual leave entitlement'
 
       done_part_time_part_year:
         title: Statutory holiday entitlement is %{part_time_holiday_entitlement} of your working days
@@ -123,7 +123,7 @@ en-GB:
       done_annualised_hours:
         title: Statutory holiday entitlement is %{annualised_holiday_entitlement} hours
         body: |
-          Your paid statutory holiday entitelement is %{annualised_holiday_entitlement} hours for the year.
+          Your paid statutory holiday entitlement is %{annualised_holiday_entitlement} hours for the year.
 
           Your employer can:
 

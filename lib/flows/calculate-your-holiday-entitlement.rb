@@ -13,21 +13,34 @@ multiple_choice :what_is_your_employment_status? do
 end
 
 multiple_choice :full_time_worked? do
-  option "full-year" => :full_time_year
-  option "part-year" => :full_time_part_leaving
+  option "full-year" => :full_time_year?
+  option "starting" => :full_time_starting_date?
+  option "leaving" => :full_time_leaving_date?
 end
 
-multiple_choice :full_time_year do
+multiple_choice :full_time_year? do
   option "5-days-a-week" => :done_full_time_5_days
   option "more-than-5-days-a-week" => :done_full_time_more_than_5
 end
 
 # TODO: can we factor this date range stuff out? It's all the same
-date_question :full_time_part_leaving do
+date_question :full_time_starting_date? do
   from { Date.civil(Date.today.year, 1, 1) }
   to { Date.civil(Date.today.year, 12, 31) }
   save_input_as :start_date
-  calculate :days_employed do
+  next_node :done_full_time_part_year
+  calculate :fraction_of_year do
+    calculator.fraction_of_year Date.civil(Date.today.year, 12, 31), start_date
+  end
+end
+
+date_question :full_time_leaving_date? do
+  from { Date.civil(Date.today.year, 1, 1) }
+  to { Date.civil(Date.today.year, 12, 31) }
+  save_input_as :leaving_date
+  next_node :done_full_time_part_year
+  calculate :fraction_of_year do
+    calculator.fraction_of_year leaving_date, Date.civil(Date.today.year, 1, 1)
   end
 end
 
@@ -37,7 +50,6 @@ multiple_choice :part_time_worked? do
   option "leaving" => :part_time_leaving_date?
 end
 
-# TODO
 date_question :part_time_starting_date? do
   from { Date.civil(Date.today.year, 1, 1) }
   to { Date.civil(Date.today.year, 12, 31) }
@@ -48,7 +60,6 @@ date_question :part_time_starting_date? do
   end
 end
 
-# TODO
 date_question :part_time_leaving_date? do
   from { Date.civil(Date.today.year, 1, 1) }
   to { Date.civil(Date.today.year, 12, 31) }
@@ -76,8 +87,13 @@ end
 value_question :casual_or_irregular_hours? do
   next_node :done_casual_hours
   calculate :casual_holiday_entitlement do
-    # TODO: translate this into hours and minutes
-    responses.last.to_f * (5.6 / (52.0 - 5.6))
+    calculator.hours_as_seconds responses.last.to_f * (5.6 / (52.0 - 5.6))
+  end
+  calculate :entitlement_hours do
+    (calculator.seconds_to_hash(holiday_entitlement)[:dd] * 24) + calculator.seconds_to_hash(casual_holiday_entitlement)[:hh]
+  end
+  calculate :entitlement_minutes do
+    calculator.seconds_to_hash(casual_holiday_entitlement)[:mm]
   end
 end
 
@@ -86,9 +102,14 @@ value_question :annualised_hours? do
   calculate :annualised_weekly_average do
     responses.last.to_f / 46.4
   end
-  calculate :annualised_holiday_entitlement do
-    # TODO: translate this into hours and minutes
-    5.6 * annualised_weekly_average.to_f
+  calculate :holiday_entitlement do
+    calculator.hours_as_seconds 5.6 * annualised_weekly_average.to_f
+  end
+  calculate :entitlement_hours do
+    (calculator.seconds_to_hash(holiday_entitlement)[:dd] * 24) + calculator.seconds_to_hash(holiday_entitlement)[:hh]
+  end
+  calculate :entitlement_minutes do
+    calculator.seconds_to_hash(holiday_entitlement)[:mm]
   end
 end
 
@@ -135,6 +156,7 @@ end
 
 outcome :done_full_time_5_days
 outcome :done_full_time_more_than_5
+outcome :done_full_time_part_year
 outcome :done_part_time_year
 outcome :done_part_time_part_year
 outcome :done_casual_hours

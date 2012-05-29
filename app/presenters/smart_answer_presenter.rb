@@ -96,6 +96,8 @@ class SmartAnswerPresenter
     presenter_class = case node
     when SmartAnswer::Question::Date
       DateQuestionPresenter
+    when SmartAnswer::Question::CountrySelect
+      CountrySelectQuestionPresenter
     when SmartAnswer::Question::MultipleChoice
       MultipleChoiceQuestionPresenter
     when SmartAnswer::Question::Value
@@ -106,6 +108,8 @@ class SmartAnswerPresenter
       SalaryQuestionPresenter
     when SmartAnswer::Question::Base
       QuestionPresenter
+    when SmartAnswer::Outcome
+      OutcomePresenter
     else NodePresenter
     end
     presenter_class.new(i18n_prefix, node, current_state)

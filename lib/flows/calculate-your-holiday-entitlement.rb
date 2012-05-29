@@ -162,7 +162,7 @@ date_question :shift_worker_starting_date? do
   from { Date.civil(Date.today.year, 1, 1) }
   to { Date.civil(Date.today.year, 12, 31) }
   save_input_as :start_date
-  next_node :done_shift_worker_part_year
+  next_node :shift_worker_year_shift_length?
   calculate :fraction_of_year do
     calculator.fraction_of_year Date.civil(Date.today.year, 12, 31), start_date
   end
@@ -172,7 +172,7 @@ date_question :shift_worker_leaving_date? do
   from { Date.civil(Date.today.year, 1, 1) }
   to { Date.civil(Date.today.year, 12, 31) }
   save_input_as :leaving_date
-  next_node :done_shift_worker_part_year
+  next_node :shift_worker_year_shift_length?
   calculate :fraction_of_year do
     calculator.fraction_of_year leaving_date, Date.civil(Date.today.year, 1, 1)
   end
@@ -189,12 +189,15 @@ value_question :shift_worker_year_shift_count? do
 end
 
 value_question :shift_worker_days_pattern? do
-  next_node :done_shift_worker_year
+  next_node do
+    fraction_of_year.nil? ? :done_shift_worker_year : :done_shift_worker_part_year
+  end
+
   calculate :shifts_per_week do
     (shift_count.to_f / responses.last.to_f) * 7
   end
   calculate :holiday_entitlement do
-    calculator.format_number shifts_per_week * 5.6
+    calculator.format_number shifts_per_week * 5.6 * (fraction_of_year || 1.0)
   end
 end
 
@@ -207,3 +210,4 @@ outcome :done_casual_hours
 outcome :done_annualised_hours
 outcome :done_compressed_hours
 outcome :done_shift_worker_year
+outcome :done_shift_worker_part_year

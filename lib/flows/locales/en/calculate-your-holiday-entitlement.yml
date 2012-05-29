@@ -188,3 +188,14 @@ en-GB:
 
           - Can include public and bank holidays as part of your statutory entitlement
           - Give you more paid holiday - this will be in your employment contract and is called 'contractual leave entitlement'
+
+      done_shift_worker_part_year:
+        title: Statutory holiday entitlement is %{holiday_entitlement} %{shift_length} hour shifts.
+        body: |
+          Your paid statutory holiday entitlement is %{holiday_entitlement} %{shift_length} hour shifts.
+
+          Your employer:
+
+          - Can include public and bank holidays as part of your statutory entitlement
+          - Must not round down your holiday entitlement, but may round it up
+          - Give you more paid holiday - this will be in your employment contract and is called 'contractual leave entitlement'

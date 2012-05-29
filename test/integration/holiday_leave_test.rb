@@ -142,7 +142,7 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
     respond_with "8"
     respond_with "3"
     respond_with "10"
-    assert_results_contain "7.9 8 hour shifts"
+    assert_results_contain "8.8 8 hour shifts"
   end
 
   test "Shift worker leaving this year flow" do
@@ -152,7 +152,7 @@ class HolidayLeaveTest < ActionDispatch::IntegrationTest
     respond_with "8"
     respond_with "3"
     respond_with "10"
-    assert_results_contain "6 8 hour shifts"
+    assert_results_contain "4.9 8 hour shifts"
   end
 
 end

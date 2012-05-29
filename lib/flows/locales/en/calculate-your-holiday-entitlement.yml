@@ -58,10 +58,10 @@ en-GB:
         title: When are you starting?
 
       part_time_year_days_worked?:
-        title: How many days per week?
+        title: How many days do you work per week?
 
       part_time_part_year_days_worked?:
-        title: How many days per week?
+        title: How many days do you work per week?
 
       compressed_hours?:
         title: How many hours per week do you work?

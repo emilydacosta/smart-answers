@@ -28,7 +28,7 @@ date_question :full_time_starting_date? do
   from { Date.civil(Date.today.year, 1, 1) }
   to { Date.civil(Date.today.year, 12, 31) }
   save_input_as :start_date
-  next_node :done_full_time_part_year
+  next_node :full_time_part_year_days?
   calculate :fraction_of_year do
     calculator.fraction_of_year Date.civil(Date.today.year, 12, 31), start_date
   end
@@ -38,9 +38,18 @@ date_question :full_time_leaving_date? do
   from { Date.civil(Date.today.year, 1, 1) }
   to { Date.civil(Date.today.year, 12, 31) }
   save_input_as :leaving_date
-  next_node :done_full_time_part_year
+  next_node :full_time_part_year_days?
   calculate :fraction_of_year do
     calculator.fraction_of_year leaving_date, Date.civil(Date.today.year, 1, 1)
+  end
+end
+
+multiple_choice :full_time_part_year_days? do
+  option "5-days" => :done_full_time_part_year
+  option "6-days" => :done_full_time_part_year
+  option "7-days" => :done_full_time_part_year
+  calculate :holiday_entitlement_days do
+    5.6 * fraction_of_year * responses.last.sub('-days', '').to_f
   end
 end
 
@@ -131,7 +140,28 @@ end
 
 multiple_choice :shift_worker_basis? do
   option "full-year" => :shift_worker_year_shift_length?
-  option "part-year" => :shift_worker_part_year
+  option "starting" => :shift_worker_starting_date?
+  option "leaving" => :shift_worker_leaving_date?
+end
+
+date_question :shift_worker_starting_date? do
+  from { Date.civil(Date.today.year, 1, 1) }
+  to { Date.civil(Date.today.year, 12, 31) }
+  save_input_as :start_date
+  next_node :done_shift_worker_part_year
+  calculate :fraction_of_year do
+    calculator.fraction_of_year Date.civil(Date.today.year, 12, 31), start_date
+  end
+end
+
+date_question :shift_worker_leaving_date? do
+  from { Date.civil(Date.today.year, 1, 1) }
+  to { Date.civil(Date.today.year, 12, 31) }
+  save_input_as :leaving_date
+  next_node :done_shift_worker_part_year
+  calculate :fraction_of_year do
+    calculator.fraction_of_year leaving_date, Date.civil(Date.today.year, 1, 1)
+  end
 end
 
 value_question :shift_worker_year_shift_length? do

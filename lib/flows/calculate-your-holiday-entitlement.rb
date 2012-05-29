@@ -194,7 +194,7 @@ value_question :shift_worker_days_pattern? do
     (shift_count.to_f / responses.last.to_f) * 7
   end
   calculate :holiday_entitlement do
-    shifts_per_week * 5.6
+    calculator.format_number shifts_per_week * 5.6
   end
 end
 
